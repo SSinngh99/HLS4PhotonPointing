@@ -1,13 +1,14 @@
-#ifndef KRNL1_SQUARE_H
-#define KRNL1_SQUARE_H
+#ifndef PPZCALC_H
+#define PPZCALC_H
 
 #include <stdint.h>
 #include <hls_stream.h>
 
-#define MaxN 3
+#define MaxN 5
 
 extern "C" {
-void Kernel1_Square(hls::stream<int>& InputK1, hls::stream<int>& Out);
+void PPZCalcStream(hls::stream<float>& InputStreamEtaL1, hls::stream<float>& InputStreamEtaL2, hls::stream<float>& OutStream);
+float PPZ_calc(float eta1, float eta2):
 }
 
-#endif // KRNL1_SQUARE_H
+#endif // PPZCALC_H
