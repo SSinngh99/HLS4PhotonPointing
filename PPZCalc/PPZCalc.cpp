@@ -2,14 +2,7 @@
 #include "hls_math.h"
 #include "PPZCalc.h"
 
-void SquareStream(hls::stream<int>& InputStream, hls::stream<int>& OutStream){
-    int inVal, inputSq;
-    do {
-    inVal = InputStream.read();
-    inputSq = inVal * inVal;
-    OutStream.write(inputSq);
-    }while (!InputStream.empty());
-}
+
 
 void PPZCalcStream(hls::stream<float>& InputStreamEtaL1, hls::stream<float>& InputStreamEtaL2, hls::stream<float>& OutStream){
     #pragma HLS INTERFACE axis port = InputStreamEtaL1 depth=MaxN
