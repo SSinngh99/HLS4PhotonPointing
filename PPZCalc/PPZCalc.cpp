@@ -15,7 +15,10 @@ void PPZCalcStream(hls::stream<float>& InputStreamEtaL1, hls::stream<float>& Inp
     #pragma HLS INTERFACE axis port = InputStreamEtaL1 depth=MaxN
     #pragma HLS INTERFACE axis port = InputStreamEtaL2 depth=MaxN
     #pragma HLS INTERFACE axis port = OutStream depth=MaxN
-    
+
+    #pragma HLS DATAFLOW
+    //#pragma HLS PIPELINE II=1
+
     float EtaL1, EtaL2, PPZ;
     do {
     EtaL1 = InputStreamEtaL1.read();
@@ -25,42 +28,69 @@ void PPZCalcStream(hls::stream<float>& InputStreamEtaL1, hls::stream<float>& Inp
     }while ((!InputStreamEtaL1.empty()) && (!InputStreamEtaL2.empty()));
 }
 
+static float z1_eval(float aeta, float eta, float s1) {
+  #pragma HLS INLINE region
+
+  // Horner form, reuse s1 precomputed
+  float z;
+  if (aeta < 0.8f) {
+    // (1558.859292 - 4.990838*a - 21.144279*a^2) * s1
+    float c = -21.144279f;
+    z = (c*aeta + (-4.990838f))*aeta + 1558.859292f;
+    z *= s1;
+  } else if (aeta < 1.5f) {
+    // (1522.775373 + 27.970192*a - 21.104108*a^2) * s1
+    float c = -21.104108f;
+    z = (c*aeta + 27.970192f)*aeta + 1522.775373f;
+    z *= s1;
+  } else {
+    z = 3790.671754f;
+    if (eta < 0.f) z = -z;
+  }
+  return z;
+}
+
+static float z2_eval(float aeta, float eta, float s2) {
+  #pragma HLS INLINE region
+
+  float z;
+  if (aeta < 1.425f) {
+    // (1698.990944 - 49.431767*a - 24.504976*a^2) * s2
+    float c = -24.504976f;
+    z = (c*aeta + (-49.431767f))*aeta + 1698.990944f;
+    z *= s2;
+  } else if (aeta < 1.5f) {
+    // (8027.574119 - 2717.653528*a) * s2
+    z = ( -2717.653528f * aeta + 8027.574119f ) * s2;
+  } else {
+    z = (3473.473909f + 453.941515f*aeta - 119.101945f*aeta*aeta);
+    if (eta < 0.f) z = -z;
+  }
+  return z;
+}
 
 float PPZ_calc(float eta1, float eta2){
 
-    float aeta1 = abs(eta1);
-    float aeta2 = abs(eta2);
+   // #pragma HLS latency min=120
+   //#pragma HLS PIPELINE
+
+    float s1 = sinh(eta1);
+    float s2 = sinh(eta2);
+
+    float aeta1 = std::abs(eta1);
+    float aeta2 = std::abs(eta2);
     
-    float Z1 = 0.0;
-    float Z2 = 0.0;
-    
-    // For eta layer 1
-    if (aeta1 < 0.8){
-        Z1 =  (1558.859292 - 4.990838 * aeta1 - 21.144279 * aeta1 * aeta1) * sinh(eta1);
-    } else if (aeta1 < 1.5){
-        Z1 = (1522.775373 + 27.970192 * aeta1 - 21.104108 * aeta1 * aeta1) * sinh(eta1);
-    }
-    else{
-        Z1 = 3790.671754;
-        if (eta1 < 0.){
-            Z1 *= -1;
-        }
-    }
+    // #pragma HLS bind_op variable=aeta1 op=hmul
+    // #pragma HLS bind_op variable=aeta2 op=hmul
 
-    // For eta layer 2
-    if (aeta2 < 1.425) {  // Barrel
-        Z2 = (1698.990944 - 49.431767 * aeta2 - 24.504976 * aeta2 * aeta2) * sinh(eta2);
-    } else if (aeta2 < 1.5) {  // EME2 in tool
-        Z2 = (8027.574119 - 2717.653528 * aeta2) * sinh(eta2);
-    } else {
-        // endcap so Z
-        Z2 = (3473.473909 + 453.941515 * aeta2 - 119.101945 * aeta2 * aeta2);
-        if (eta2 < 0.) {
-            // negative endcap
-            Z2 *= -1;
-        }
-    }
+    float Z1 = z1_eval(aeta1, eta1, s1);
+    float Z2 = z2_eval(aeta2, eta2, s2);
 
+    // Single reciprocal instead of division
+    float num = (Z1 * Z2) * (s1 - s2);
+    float den = (Z2 * s1) - (Z1 * s2);
+    // hls::recip is cheaper than / for many targets; NR can further tune
+    float inv = hls::recip(den);
 
-    return (((Z1 * Z2) / (Z2 * sinh(eta1) - Z1 * (sinh(eta2))))*(sinh(eta1) -  sinh(eta2)));
+    return (num * inv);
 }
