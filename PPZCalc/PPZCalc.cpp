@@ -1,6 +1,6 @@
 #include "hls_stream.h"
-#include "Kernel1Square.h"
-#include "cmath.h"
+#include "hls_math.h"
+#include "PPZCalc.h"
 
 void SquareStream(hls::stream<int>& InputStream, hls::stream<int>& OutStream){
     int inVal, inputSq;
@@ -28,32 +28,39 @@ void PPZCalcStream(hls::stream<float>& InputStreamEtaL1, hls::stream<float>& Inp
 
 float PPZ_calc(float eta1, float eta2){
 
-    aeta1 = std::abs(eta1);
-    aeta2 = std::abs(eta2);
+    float aeta1 = abs(eta1);
+    float aeta2 = abs(eta2);
+    
+    float Z1 = 0.0;
+    float Z2 = 0.0;
     
     // For eta layer 1
     if (aeta1 < 0.8){
-        float Z1 =  (1558.859292 - 4.990838 * aeta1 - 21.144279 * aeta1 * aeta1) * std::sinh(eta1);
+        Z1 =  (1558.859292 - 4.990838 * aeta1 - 21.144279 * aeta1 * aeta1) * sinh(eta1);
     } else if (aeta1 < 1.5){
-        float Z1 = (1522.775373 + 27.970192 * aeta1 - 21.104108 * aeta1 * aeta1) * std::sinh(eta1);
+        Z1 = (1522.775373 + 27.970192 * aeta1 - 21.104108 * aeta1 * aeta1) * sinh(eta1);
     }
     else{
-        float Z1 = 3790.671754;
+        Z1 = 3790.671754;
+        if (eta1 < 0.){
+            Z1 *= -1;
+        }
     }
 
     // For eta layer 2
     if (aeta2 < 1.425) {  // Barrel
-        float Z2 = (1698.990944 - 49.431767 * aeta2 - 24.504976 * aeta2 * aeta2) * std::sinh(eta2);
+        Z2 = (1698.990944 - 49.431767 * aeta2 - 24.504976 * aeta2 * aeta2) * sinh(eta2);
     } else if (aeta2 < 1.5) {  // EME2 in tool
-        float Z2 = (8027.574119 - 2717.653528 * aeta2) * std::sinh(eta2);
+        Z2 = (8027.574119 - 2717.653528 * aeta2) * sinh(eta2);
     } else {
         // endcap so Z
-        float Z2 = (3473.473909 + 453.941515 * aeta2 - 119.101945 * aeta2 * aeta2);
-    }
-    if (eta2 < 0.) {
-        // negative endcap
-        Z2 = -Z2;
+        Z2 = (3473.473909 + 453.941515 * aeta2 - 119.101945 * aeta2 * aeta2);
+        if (eta2 < 0.) {
+            // negative endcap
+            Z2 *= -1;
+        }
     }
 
-    return (((Z1 * Z2) / (Z2 * std::sinh(eta1) - Z1 * (std::sinh(eta2))))*(std::sinh(eta1) -  std::sinh(eta2)));
+
+    return (((Z1 * Z2) / (Z2 * sinh(eta1) - Z1 * (sinh(eta2))))*(sinh(eta1) -  sinh(eta2)));
 }
