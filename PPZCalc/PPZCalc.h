@@ -11,6 +11,30 @@ typedef  ap_fixed<23,15> fZ; // float for Z1 and Z2, 29 bits total, 14+1 for int
 
 #define MaxN 5
 
+fZ C0_L1E08 = 1558.859292;
+fZ C1_L1E08 = -4.990838;
+fZ C2_L1E08 = -21.144279;
+
+fZ C0_L1E15 = 1522.775373;
+fZ C1_L1E15 = 27.970192;
+fZ C2_L1E15 = -21.104108;
+
+fZ C0_L1E25 = 3790.671754;
+
+fZ C0_L2E1425 = 1698.990944;
+fZ C1_L2E1425 = -49.431767;
+fZ C2_L2E1425 = -24.504976;
+
+fZ C0_L2E15 = 8027.574119;
+fZ C1_L2E15 = -2717.653528;
+
+fZ C0_L1E25 = 3473.473909;
+fZ C1_L1E25 = 453.941515;
+fZ C2_L1E25 = -119.101945;
+
+
+fZ CZero = 0;
+
 extern "C" {
 void PPZCalcStream(hls::stream<float>& InputStreamEtaL1, hls::stream<float>& InputStreamEtaL2, hls::stream<float>& OutStream);
 float PPZ_calc(float eta1, float eta2);

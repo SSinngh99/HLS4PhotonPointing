@@ -29,16 +29,14 @@ static fZ z1_eval(fEta aeta, fEta eta, fEta s1) {
   fZ z;
   if (aeta < 0.8) {
     // (1558.859292 - 4.990838*a - 21.144279*a^2) * s1
-    float c = -21.144279;
-    z = (c*aeta + (-4.990838))*aeta + 1558.859292;
+    z = CalcSecondOrder(aeta, C0_L1E08, C1_L1E08, C2_L1E08);
     z *= s1;
   } else if (aeta < 1.5) {
     // (1522.775373 + 27.970192*a - 21.104108*a^2) * s1
-    float c = -21.104108;
-    z = (c*aeta + 27.970192)*aeta + 1522.775373;
+    z = CalcSecondOrder(aeta, C0_L1E15, C1_L1E15, C2_L1E15);
     z *= s1;
   } else {
-    z = 3790.671754;
+    z = CalcSecondOrder(aeta, C0_L1E25, CZero, CZero);
     if (eta < 0) {z *= -1;}
   }
   return z;
@@ -51,19 +49,25 @@ static fZ z2_eval(fEta aeta, fEta eta, fEta s2) {
   if (aeta < 1.425) {
     // (1698.990944 - 49.431767*a - 24.504976*a^2) * s2
     float c = -24.504976;
-    z = (c*aeta + (-49.431767))*aeta + 1698.990944;
+    z = CalcSecondOrder(aeta, C0_L2E1425, C1_L2E1425, C2_L2E1425);
     z *= s2;
   } else if (aeta < 1.5) {
     // (8027.574119 - 2717.653528*a) * s2
-    z = ( -2717.653528 * aeta + 8027.574119 ) * s2;
+    z = CalcSecondOrder(aeta, C0_L2E15, C1_L2E15, CZero);
+    z *= s2;
   } else {
-    z = (3473.473909 + 453.941515*aeta - 119.101945*aeta*aeta);
+    z = CalcSecondOrder(aeta, C0_L2E25, C1_L2E25, C2_L2E25);
     if (eta < 0) z = -z;
   }
   return z;
 }
 
-float PPZ_calc(fEta eta1, fEta eta2){
+
+fZ CalcSecondOrder(fEta aeta, fZ c0, fZ c1, fZ c2){
+    return ((c2 * aeta) + c1) * aeta + c0
+}
+
+fZ PPZ_calc(fEta eta1, fEta eta2){
 
    // #pragma HLS latency min=120
    //#pragma HLS PIPELINE
