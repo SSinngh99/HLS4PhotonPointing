@@ -19,8 +19,8 @@ std::vector<float> InputVectorEtaL2 = {-2.098641, -1.191262, 0.112489, 0.202920,
 //answers: -112.0424, 516.07116, -nan, 375.0011. -1685.579224
 
 for (int i=0; i < MaxN; i++){
-    InputStreamEtaL1.write(InputVectorEtaL1[i]);
-    InputStreamEtaL2.write(InputVectorEtaL2[i]);
+    InputStreamEtaL1.write(static_cast<fEta>(InputVectorEtaL1[i]));
+    InputStreamEtaL2.write(static_cast<fEta>(InputVectorEtaL2[i]));
 }
 PPZCalcStream(InputStreamEtaL1, InputStreamEtaL2, OutputStream_Test);
 
