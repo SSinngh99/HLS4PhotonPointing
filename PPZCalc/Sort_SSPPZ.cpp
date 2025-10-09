@@ -39,13 +39,17 @@ void SortPPZArr(const fZ In[NMaxClusters], fZ Out[NMaxClusters]){
     #endif
 }
 
+
+
 fZ DeltaPPZ(const fZ In[NMaxClusters]){
     fZ min_delta = (fZ)PPZOverFlow;
+    fZ Diffs[NMaxClusters-1];
     for (int i = 0; i < NMaxClusters - 1; ++i){
-        #pragma HLS UNROLL
+        // #pragma HLS UNROLL
         if (In[i] == 0 || In[i + 1] == 0 || In[i] == PPZOverFlow || In[i + 1] == PPZOverFlow){continue;}
         fZ diff = abs_fixed(In[i+1] - In[i]);
         if (diff < min_delta) min_delta = diff;
     }
+
     return min_delta;
 }
