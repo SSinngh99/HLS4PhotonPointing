@@ -13,8 +13,8 @@
 #define PPZOverFlow 5000.0
 #define MaxPipeLine 1
 #define NMaxClusters 15
-#define fZWord 32
-#define DecimalPrecision 23 // Remember to change the sinh map when changing this otherwise there is no effect!!
+#define fZWord 42
+#define DecimalPrecision 20 // Remember to change the sinh map when changing this otherwise there is no effect!!
 #define fEtaWord DecimalPrecision + 4 //
 #define DeltaPPZCut 100
 #define TwoPowerNBitsDecimal 2**DecimalPrecision

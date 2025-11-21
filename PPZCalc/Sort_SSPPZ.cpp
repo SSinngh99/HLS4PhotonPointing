@@ -51,5 +51,8 @@ fZ DeltaPPZ(const fZ In[NMaxClusters]){
         if (diff < min_delta) min_delta = diff;
     }
 
+    #ifndef __SYNTHESIS__
+    std::cout << "Min Delta PPZ = " << min_delta << std::endl;
+    #endif
     return min_delta;
 }

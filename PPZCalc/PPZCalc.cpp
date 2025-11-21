@@ -84,18 +84,18 @@ fZ PPZ_calc(int eta1Idx, int eta2Idx){
   #pragma HLS bind_storage variable=SinhMap type=ram_2p impl=URAM // Save SinhMap as URAM 2 port memory RAM (ROM not allowed w/ URAM)
   #pragma HLS bind_storage variable=EtaIdxMap type=ram_2p impl=URAM // Save EtaIdxMap as URAM 2 port memory RAM (ROM not allowed w/ URAM)
 
-  if ((eta1Idx == -EtaIdxOverFlow) or (eta2Idx == EtaIdxOverFlow) or (eta1Idx == eta2Idx)){return PPZOverFlow;} // We can maybe recover eta1 == eta2....
+  if ((eta1Idx == EtaIdxOverFlow) or (eta2Idx == EtaIdxOverFlow) or (eta1Idx == eta2Idx)){return PPZOverFlow;} // We can maybe recover eta1 == eta2....
 
 
   fEta eta1 = EtaIdxMap[eta1Idx];
   fEta eta2 = EtaIdxMap[eta2Idx];
 
 
-    fEta aeta1 = hls::abs(eta1);
-    fEta aeta2 = hls::abs(eta2);
-
-    fEta s1 = SinhMap[eta1Idx];
-    fEta s2 = SinhMap[eta2Idx];
+  fEta aeta1 = hls::abs(eta1);
+  fEta aeta2 = hls::abs(eta2);
+          
+  fEta s1 = SinhMap[eta1Idx];
+  fEta s2 = SinhMap[eta2Idx];
 
     // #pragma HLS bind_op variable=aeta1 op=hmul
     // #pragma HLS bind_op variable=aeta2 op=hmul
@@ -107,16 +107,25 @@ fZ PPZ_calc(int eta1Idx, int eta2Idx){
   //
 
     // Single reciprocal instead of division
-    fZ num = (Z1 * Z2) * (s1 - s2);
+    fZ num = ((Z1 * Z2) * (s1 - s2));
     fZ den = (Z2 * s1) - (Z1 * s2);
 
+    // fZ Z1S2 = Z1 * s2;
+    // fZ Z2S1 = Z2 * s1;
+
+    // fZ num = Z1 * Z2S1 - Z2 * Z1S2;
+    // fZ den = Z2S1 - Z1S2;
+
+
+    fZ PPZ = num/den;
+
     #ifndef __SYNTHESIS__
+    std::cout << "e1Idx = " << eta1Idx << ", e2Idx = " << eta2Idx << std::endl;
     std::cout << "e1 = " << eta1 << ", e2 = " << eta2 << std::endl;
     std::cout << "s1 = " << s1 << ", s2 = " << s2 << std::endl;
-    std::cout << "Z1, Z2 = " << Z1 << ", " << Z2 << std::endl;
-    std::cout << "num = " << num << ", den = " << den << ", num/den = " << num/den << std::endl;
+    // std::cout << "Z1, Z2 = " << Z1 << ", " << Z2 << std::endl;
+    // std::cout << "num = " << num << ", den = " << den << ", num/den = " << num/den << std::endl;
+    std::cout << "PPZ = " << PPZ << std::endl;
     #endif
-
-    fZ PPZ = num / den;
     return (PPZ);
 }
