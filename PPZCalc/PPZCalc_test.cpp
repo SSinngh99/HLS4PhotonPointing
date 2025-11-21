@@ -11,16 +11,20 @@ int main(){
 
 // std::cout << 1;
 
-hls::stream<fEta> InputStreamEtaL1;
-hls::stream<fEta> InputStreamEtaL2;
+hls::stream<int> InputStreamEtaL1;
+hls::stream<int> InputStreamEtaL2;
 hls::stream<fZ> OutputStream_Test;
 
 std::vector<float> InputVectorEtaL1 = {-2.099481, -1.181972, -999, 0.221235, -2.082226};
 std::vector<float> InputVectorEtaL2 = {-2.098641, -1.191262, 0.112489, 0.202920, -2.060124};
 
+std::vector<int> InputEtaL1Idx = {0, 1, -9999, 2, 3};
+std::vector<int> InputEtaL2Idx = {4, 5, 6, 7, 8};
+
+
 for (int i = InputVectorEtaL1.size(); i < NMaxClusters; ++i){
-  InputVectorEtaL1.push_back(-999);
-  InputVectorEtaL2.push_back(-999);
+  InputEtaL1Idx.push_back(-9999);
+  InputEtaL2Idx.push_back(-9999);
   std::cout << i << std::endl;
 }
 
@@ -36,11 +40,9 @@ for (int i = InputVectorEtaL1.size(); i < NMaxClusters; ++i){
 
 
 for (int i = 0; i < NMaxClusters; ++i) {
-    std::cout << "eta1[" << i << "] = " << InputVectorEtaL1[i] << std::endl;
-    fEta e1 = (fEta)InputVectorEtaL1[i];
-    fEta e2 = (fEta)InputVectorEtaL2[i];
-    InputStreamEtaL1.write(e1);
-    InputStreamEtaL2.write(e2);
+    std::cout << "eta1[" << i << "] = " << InputEtaL1Idx[i] << std::endl;
+    InputStreamEtaL1.write(InputEtaL1Idx[i]);
+    InputStreamEtaL2.write(InputEtaL2Idx[i]);
   }
 
 
