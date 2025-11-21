@@ -12,10 +12,11 @@
 #define PPZOverFlow 5000.0
 #define MaxPipeLine 1
 #define NMaxClusters 15
-#define fZWord 32
+#define fZWord 40
 #define DecimalPrecision 8 // Remember to change the sinh map when changing this otherwise there is no effect!!
 #define fEtaWord DecimalPrecision + 4 //
 #define DeltaPPZCut 100
+#define TwoPowerNBitsDecimal 2**DecimalPrecision
 
 
 typedef  ap_fixed<fEtaWord, fEtaWord - DecimalPrecision> fEta; // float for sinh(x), 18 bits in total, 3 + 1 signed bit for the integer part (-8, 8) and 8 bits for the decimal (1/2^8)

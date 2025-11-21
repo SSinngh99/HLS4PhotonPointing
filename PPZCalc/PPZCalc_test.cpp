@@ -19,8 +19,8 @@ std::vector<float> InputVectorEtaL1 = {-2.099481, -1.181972, -999, 0.221235, -2.
 std::vector<float> InputVectorEtaL2 = {-2.098641, -1.191262, 0.112489, 0.202920, -2.060124};
 
 for (int i = InputVectorEtaL1.size(); i < NMaxClusters; ++i){
-  InputVectorEtaL1.push_back(-2.082226);
-  InputVectorEtaL2.push_back(-2.060124);
+  InputVectorEtaL1.push_back(-999);
+  InputVectorEtaL2.push_back(-999);
   std::cout << i << std::endl;
 }
 

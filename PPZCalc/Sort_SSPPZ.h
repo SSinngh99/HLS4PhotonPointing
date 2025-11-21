@@ -5,4 +5,5 @@
 
 void SortPPZArr(const fZ In[NMaxClusters], fZ Out[NMaxClusters]);
 fZ DeltaPPZ(const fZ In[NMaxClusters]);
+fZ tournament_min(const fZ diffs[NMaxClusters-1]);
 #endif // SORT_SSPPZ_H
