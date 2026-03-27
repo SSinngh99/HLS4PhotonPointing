@@ -15,6 +15,7 @@
 #define DecimalPrecision 8
 #define fBCWord DecimalPrecision + 4
 #define NCells 64
+#define fEtaWord DecimalPrecision + 4 //
 
 
 
@@ -22,6 +23,7 @@
 
 typedef  ap_fixed<fETWord, fETWord - DecimalPrecision> fET; // float for ET, can be changed on the fly.
 typedef  ap_fixed<fBCWord, fBCWord - DecimalPrecision> fBC; // float for BC eta calc, 29 bits total, 14+1 for integer (+/-16384), 8 bit decimal
+typedef  ap_fixed<fEtaWord, fEtaWord - DecimalPrecision> fEta; // float for sinh(x), 18 bits in total, 3 + 1 signed bit for the integer part (-8, 8) and 8 bits for the decimal (1/2^8)
 
 // Candidate packet
 struct Candidate {
