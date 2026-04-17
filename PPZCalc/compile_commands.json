@@ -1,0 +1,61 @@
+[
+  {
+    "directory": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc",
+    "arguments": [
+      "C:\\Xilinx\\2025.1\\Vitis\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\Xilinx\\2025.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\Xilinx\\2025.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=PPZCalcStream",
+      "-I",
+      "../",
+      "-c",
+      "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\PPZCalc.cpp"
+    ],
+    "file": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\PPZCalc.cpp"
+  },
+  {
+    "directory": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc",
+    "arguments": [
+      "C:\\Xilinx\\2025.1\\Vitis\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\Xilinx\\2025.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\Xilinx\\2025.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=PPZCalcStream",
+      "-I",
+      "../",
+      "-c",
+      "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\PPZTopFunc.cpp"
+    ],
+    "file": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\PPZTopFunc.cpp"
+  },
+  {
+    "directory": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc",
+    "arguments": [
+      "C:\\Xilinx\\2025.1\\Vitis\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\Xilinx\\2025.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\Xilinx\\2025.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=PPZCalcStream",
+      "-I",
+      "../",
+      "-c",
+      "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\Sort_SSPPZ.cpp"
+    ],
+    "file": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\Sort_SSPPZ.cpp"
+  },
+  {
+    "directory": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc",
+    "arguments": [
+      "C:\\Xilinx\\2025.1\\Vitis\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\Xilinx\\2025.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=C:\\Xilinx\\2025.1\\Vitis\\include",
+      "-I",
+      "../",
+      "-c",
+      "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\PPZCalc_test.cpp"
+    ],
+    "file": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\PPZCalc\\.\\.\\PPZCalc_test.cpp"
+  }
+]

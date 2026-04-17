@@ -6,11 +6,11 @@ void PPZCalcStream(hls::stream<int>& InputStreamEtaL1, hls::stream<int>& InputSt
     #pragma HLS INTERFACE axis port = InputStreamEtaL2 
     #pragma HLS INTERFACE axis port = OutStream
      
-    fZ UnsortedArr[NMaxClusters] = {};
-    fZ SortedArr[NMaxClusters] = {};
+    fZ UnsortedArr[NMaxTOBs] = {};
+    fZ SortedArr[NMaxTOBs] = {};
     
     PPZCalc_Loop:
-    for (int i = 0; i < NMaxClusters; ++i){
+    for (int i = 0; i < NMaxTOBs; ++i){
         int Eta1Idx = InputStreamEtaL1.read();
         int Eta2Idx = InputStreamEtaL2.read();
         // #pragma HLS UNROLL factor=MaxPipeLine // Will have MaxPipeLine number of loops = MaxPipeLine number of PPZ?

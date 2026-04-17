@@ -1,6 +1,31 @@
 #ifndef TYPEDEFS_H
 #define TYPEDEFS_H
 
+#include <ap_fixed.h>
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+
+// This NEEDS TO BE OPTIMIZED AS OF APRIL 2026
+
+#define EtaIdxOverFlow -9999
+#define PPZOverFlow 5000.0
+#define NMaxTOBs 15
+#define DeltaPPZCut 100 // To be changed
+
+#define DecimalPrecisionPPZ 20 // Remember to change the sinh map when changing this otherwise there is no effect!!
+#define fZWord 42
+#define fZIntBits fZWord - DecimalPrecisionPPZ
+#define fEtaPPZWord DecimalPrecisionPPZ + 4 
+#define fEtaPPZIntBits fEtaPPZWord - DecimalPrecisionPPZ
+
+
+
+typedef  ap_fixed<fEtaPPZWord, fEtaPPZIntBits> fEtaPPZ; // float for sinh(x), 18 bits in total, 3 + 1 signed bit for the integer part (-8, 8) and 8 bits for the decimal (1/2^8)
+typedef  ap_fixed<fZWord, fZWord - DecimalPrecisionPPZ> fZ; // float for Z1 and Z2, 29 bits total, 14+1 for integer (+/-16384), 8 bit decimal
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+
 #define NCells 16 // Number of cells --> 16 in L2
 #define fETWord 12 // Size of word for single ET in cell
 #define fETDecimalBits 4 // Decimal precision for ET in cell
