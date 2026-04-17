@@ -1,24 +1,8 @@
-# Ignore build output directory
-/build
-/export
+# Ignore .cache across everything
+*/.cache
 
-# Ignore object files and dependent files
-*.o
-*.d
+# Ignore local _ide
+_ide
 
-#Ignore logs folder and log files
-/logs
-*.log
-
-#Ignore lock files
-*.lock
-
-*.bin
-*.pdi
-*.vitisWorkspace.json
-
-_ide/logs
-_ide/.wsdata
-
-# Ignore _ide folder
-/_ide
+# Ignore all /dfx_runtime.txt
+*/dfx_runtime.txt
