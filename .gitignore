@@ -6,3 +6,6 @@ _ide
 
 # Ignore all /dfx_runtime.txt
 */dfx_runtime.txt
+
+# Ignore ./Build
+Build
