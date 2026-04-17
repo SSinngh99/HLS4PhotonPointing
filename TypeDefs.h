@@ -62,6 +62,11 @@ typedef  ap_fixed<fBetaWord, fBetaIntBits> fBeta; // Can change to be something 
 typedef ap_uint<fEtaIdxL1Word> fEtaIdxL1; 
 typedef  ap_uint<6> SixBitInt; // Six bit int for CellIdx for L1 --> easier to test since it has a 32nd idx --> EMIT signal
 
+////////////////////////////////////////////////
+///////////////// PER TOB CALC /////////////////
+////////////////////////////////////////////////
 
+typedef ap_uint<3> ThreeBitInt; // Max towers/TOB = 4, count to 2+1 bits
+#define MaxNTowersPerTOB 4
 
 #endif // TYPEDEFS_H
