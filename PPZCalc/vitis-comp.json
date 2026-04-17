@@ -1,0 +1,13 @@
+{
+  "name": "PPZCalc",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "./hls_config_PPZCalc.cfg"
+    ],
+    "work_dir": "PPZCalcStream"
+  },
+  "useSysrootToolchain": false,
+  "template": "empty_hls_component"
+}
