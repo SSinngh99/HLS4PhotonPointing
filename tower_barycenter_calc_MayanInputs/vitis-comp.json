@@ -1,0 +1,13 @@
+{
+  "name": "tower_barycenter_calc_MayanInputs",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config_TowerBCMayanInputs.cfg"
+    ],
+    "work_dir": "tower_barycenter_calc_MayanInputs"
+  },
+  "useSysrootToolchain": false,
+  "template": "empty_hls_component"
+}

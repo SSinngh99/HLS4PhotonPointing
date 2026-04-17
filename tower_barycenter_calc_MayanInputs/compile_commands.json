@@ -1,0 +1,31 @@
+[
+  {
+    "directory": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\tower_barycenter_calc_MayanInputs",
+    "arguments": [
+      "C:\\Xilinx\\2025.1\\Vitis\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\Xilinx\\2025.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\Xilinx\\2025.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=BCCalcStreamMayanInputs",
+      "-I",
+      "../",
+      "-c",
+      "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\tower_barycenter_calc_MayanInputs\\.\\BarycenterTopFuncMayanInputs.cpp"
+    ],
+    "file": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\tower_barycenter_calc_MayanInputs\\.\\BarycenterTopFuncMayanInputs.cpp"
+  },
+  {
+    "directory": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\tower_barycenter_calc_MayanInputs",
+    "arguments": [
+      "C:\\Xilinx\\2025.1\\Vitis\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\Xilinx\\2025.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=C:\\Xilinx\\2025.1\\Vitis\\include",
+      "-I",
+      "../",
+      "-c",
+      "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\tower_barycenter_calc_MayanInputs\\.\\BarycenterCalcMayanInputs_test.cxx"
+    ],
+    "file": "C:\\Xilinx\\HLSProjects\\HLS4PhotonPointing\\tower_barycenter_calc_MayanInputs\\.\\BarycenterCalcMayanInputs_test.cxx"
+  }
+]
