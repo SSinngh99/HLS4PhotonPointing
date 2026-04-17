@@ -31,6 +31,7 @@ void BCCalcStreamMayanInputs(
     #pragma HLS INTERFACE axis port=OutStreamNum
     #pragma HLS INTERFACE axis port=OutStreamDen
     #pragma HLS PIPELINE II=1
+    // #pragma HLS latency min=12 // We will be limited by the max cell in L1 stuff so we can add a min latency if needed
     // #pragma HLS bind_storage variable=EtaDiffMapL2 type=ram_2p impl=URAM
     
 
