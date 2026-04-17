@@ -2,7 +2,9 @@
 #define TYPEDEFS_H
 
 #include <ap_fixed.h>
+
 ////////////////////////////////////////////////
+///////////////// PPZ CALC /////////////////////
 ////////////////////////////////////////////////
 
 // This NEEDS TO BE OPTIMIZED AS OF APRIL 2026
@@ -24,6 +26,7 @@ typedef  ap_fixed<fEtaPPZWord, fEtaPPZIntBits> fEtaPPZ; // float for sinh(x), 18
 typedef  ap_fixed<fZWord, fZWord - DecimalPrecisionPPZ> fZ; // float for Z1 and Z2, 29 bits total, 14+1 for integer (+/-16384), 8 bit decimal
 
 ////////////////////////////////////////////////
+///////////////// TOWER BC CALC ////////////////
 ////////////////////////////////////////////////
 
 #define NCells 16 // Number of cells --> 16 in L2
@@ -40,7 +43,7 @@ typedef  ap_fixed<fZWord, fZWord - DecimalPrecisionPPZ> fZ; // float for Z1 and 
 #define fAlphaWord fAlphaIntBits + DecimalPrecisionBits // max(alpha) = 2.5 * beta --> 2 integer bits more than beta, but w/ full precision in decimal bits
 
 
-typedef  ap_fixed<fETWord, fETIntBits> fET; // float for ET, can be changed on the fly.
+typedef  ap_fixed<fETWord, fETIntBits, AP_TRN, AP_SAT> fET; // float for ET, can be changed on the fly.
 typedef  ap_fixed<DecimalPrecisionBits + 2, 2> fEta; // Decimal precision needed for 0.025
 typedef  ap_uint<1> SingleBitInt; // Single bit for state
 typedef  ap_uint<5> FiveBitInt; // Five bit int for CellIdx and NETIdx --> easier to test since it has a 16th idx --> EMIT signal
@@ -48,5 +51,17 @@ typedef  ap_uint<5> FiveBitInt; // Five bit int for CellIdx and NETIdx --> easie
 
 typedef  ap_fixed<fAlphaWord, fAlphaIntBits> fAlpha; // Should have 2 more integer bits than fBeta, and DecimalPrecisionBits number of fractional bits --> Total word = fETWord - fETDecimalPrec + 2 + DecimalPrecision
 typedef  ap_fixed<fBetaWord, fBetaIntBits> fBeta; // Can change to be something else, preferably the scheme for full tower ET
+
+////////////////////////////////////////////////
+///////////////// MAX CELL L1 //////////////////
+////////////////////////////////////////////////
+
+#define fEtaIdxL1Word 11 // 11 bits total needed to represent L1 from -2.5 to 2.5
+#define MaxNCellsL1 32 // Number of max N cells --> technically this is different for different areas in eta.... but max is 32 --> keep counting till 32 before forcefully sending EMIT
+#define OverflowL1IdxEta 2000 // There should never be idx 2000 in L1 so it is an overflow idx
+typedef ap_uint<fEtaIdxL1Word> fEtaIdxL1; 
+typedef  ap_uint<6> SixBitInt; // Six bit int for CellIdx for L1 --> easier to test since it has a 32nd idx --> EMIT signal
+
+
 
 #endif // TYPEDEFS_H

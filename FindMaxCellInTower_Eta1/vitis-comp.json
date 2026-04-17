@@ -1,0 +1,13 @@
+{
+  "name": "FindMaxCellInTower_Eta1",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "FindMaxCellInTower_Eta1"
+  },
+  "useSysrootToolchain": false,
+  "template": "empty_hls_component"
+}
