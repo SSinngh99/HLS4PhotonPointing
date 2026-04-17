@@ -1,0 +1,13 @@
+{
+  "name": "ComputeEta1ForTOB",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config_ComputeEta1ForTOB.cfg"
+    ],
+    "work_dir": "ComputeEta1ForTOB"
+  },
+  "useSysrootToolchain": false,
+  "template": "empty_hls_component"
+}

@@ -65,7 +65,7 @@ for (int i = 0; i < InputVectorEtaL1.size(); ++i){
 
 
 
-for (int i = InputVectorEtaL1.size(); i < NMaxClusters; ++i){
+for (int i = InputVectorEtaL1.size(); i < NMaxTOBs; ++i){
   InputEtaL1Idx.push_back(-9999);
   InputEtaL2Idx.push_back(-9999);
   std::cout << i << std::endl;
@@ -82,7 +82,7 @@ for (int i = InputVectorEtaL1.size(); i < NMaxClusters; ++i){
 // //answers: -112.0424, 516.07116, -nan, 375.0011. -1685.579224
 
 
-for (int i = 0; i < NMaxClusters; ++i) {
+for (int i = 0; i < NMaxTOBs; ++i) {
     std::cout << "eta1Idx[" << i << "] = " << InputEtaL1Idx[i] << std::endl;
     InputStreamEtaL1.write(InputEtaL1Idx[i]);
     InputStreamEtaL2.write(InputEtaL2Idx[i]);

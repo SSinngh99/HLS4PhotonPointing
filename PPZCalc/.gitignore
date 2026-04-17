@@ -10,6 +10,7 @@
 /logs
 .log
 
+
 #Ignore lock files
 .lock
 
@@ -19,3 +20,6 @@
 
 _ide/logs
 _ide/.wsdata
+
+# Ignore the C synthesis folder
+PPZCalcStream/*

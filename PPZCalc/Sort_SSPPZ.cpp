@@ -9,23 +9,23 @@ static inline fZ abs_fixed(fZ x) {
   return (x >= (fZ)0) ? x : (fZ)(-x);
 }
 
-void SortPPZArr(const fZ In[NMaxClusters], fZ Out[NMaxClusters]){
-    bool cmp[NMaxClusters-1];
+void SortPPZArr(const fZ In[NMaxTOBs], fZ Out[NMaxTOBs]){
+    bool cmp[NMaxTOBs-1];
     #pragma HLS ARRAY_PARTITION variable=In  complete
     #pragma HLS ARRAY_PARTITION variable=Out complete
     #pragma HLS ARRAY_PARTITION variable=cmp complete
     
     
-    for (int i = 0; i < NMaxClusters; ++i) {
+    for (int i = 0; i < NMaxTOBs; ++i) {
         // #pragma HLS UNROLL
-        for (int j = 0; j < NMaxClusters; ++j) {
+        for (int j = 0; j < NMaxTOBs; ++j) {
             #pragma HLS UNROLL
             if (j < i)      cmp[j]   = (In[i] >= In[j]);
             else if (j > i) cmp[j-1] = (In[i] >  In[j]);
         }
 
         int r = 0;
-        for (int k = 0; k < NMaxClusters-1; ++k) {
+        for (int k = 0; k < NMaxTOBs-1; ++k) {
             #pragma HLS UNROLL
             r += cmp[k];
         }
@@ -33,7 +33,7 @@ void SortPPZArr(const fZ In[NMaxClusters], fZ Out[NMaxClusters]){
     }
 
     #ifndef __SYNTHESIS__
-    for (int i = 0; i < NMaxClusters; ++i){
+    for (int i = 0; i < NMaxTOBs; ++i){
         std::cout << "Out[" << i << "]: " << Out[i] << std::endl;
     }
     #endif
@@ -41,10 +41,10 @@ void SortPPZArr(const fZ In[NMaxClusters], fZ Out[NMaxClusters]){
 
 
 
-fZ DeltaPPZ(const fZ In[NMaxClusters]){
+fZ DeltaPPZ(const fZ In[NMaxTOBs]){
     fZ min_delta = (fZ)PPZOverFlow;
-    fZ Diffs[NMaxClusters-1];
-    for (int i = 0; i < NMaxClusters - 1; ++i){
+    fZ Diffs[NMaxTOBs-1];
+    for (int i = 0; i < NMaxTOBs - 1; ++i){
         // #pragma HLS UNROLL
         if (In[i] == 0 || In[i + 1] == 0 || In[i] == PPZOverFlow || In[i + 1] == PPZOverFlow){continue;}
         fZ diff = abs_fixed(In[i+1] - In[i]);
