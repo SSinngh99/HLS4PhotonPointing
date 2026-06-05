@@ -29,7 +29,7 @@ typedef  ap_fixed<fZWord, fZWord - DecimalPrecisionPPZ> fZ; // float for Z1 and 
 ///////////////// TOWER BC CALC ////////////////
 ////////////////////////////////////////////////
 
-#define NCells 16 // Number of cells --> 16 in L2
+#define MaxNCellsL2 16 // Number of cells --> 16 in L2
 #define fETWord 12 // Size of word for single ET in cell
 #define fETDecimalBits 4 // Decimal precision for ET in cell
 #define DecimalPrecisionBits 16 // Decimal precision we need/want for barycenter calc

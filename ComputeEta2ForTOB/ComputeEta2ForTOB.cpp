@@ -2,7 +2,6 @@
 #include "TypeDefs.h"
 
 SingleBitInt init = 0;
-fET ETVec[NCells];
 static State state;
 ThreeBitInt countTowers;
 fAlpha AlphaSum;

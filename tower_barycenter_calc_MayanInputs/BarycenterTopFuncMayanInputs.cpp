@@ -88,7 +88,7 @@ void BCCalcStreamMayanInputs(
 
             #ifndef __SYNTHESIS__
             std::cout << "EMIT:" << std::endl;
-            std:: cout << "countCells = " << countCells << ", Alpha = " << Alpha << ", Beta = " << Beta << ", eta = " << eta << std::endl;
+            std:: cout << "countCells = " << countCells << ", Omega = " << Alpha << ", Alpha = " << Alpha_out << ", Beta = " << Beta << ", eta = " << eta << std::endl;
             #endif
 
             countCells = 0;
